@@ -1,18 +1,16 @@
 import './App.css'
 import Test from "./Test";
+import Header from "./component/Header";
+import Contend from "./component/Content";
+import Footer from "./component/Footer";
 import React, { useState, useEffect } from 'react';
 function App() {
-  let c = 10;
-  // function Add() {
-  //   c = document.getElementById('a').value + document.getElementById('b').value;
-  // }
+
   return (
     <div>
-      <input id = "a" onChange={()=>{c = document.getElementById('a').value}}/>
-      +
-      <input id = "b"/>
-      =
-      {c}
+      <Header/>
+      <Contend/>
+      <Footer/>
     </div>
   )
 }
