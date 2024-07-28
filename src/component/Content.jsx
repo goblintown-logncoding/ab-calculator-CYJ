@@ -1,47 +1,44 @@
+import { useRef, useState } from "react";
 import "./Content.css";
+
 const Content = () => {
-    let out= 0;
+    const refA = useRef();
+    const refB = useRef();
+    const [state,setState] = useState(0);
+    const [out,setOut] = useState(0);
     let operator = "+";
-    let mode = 0;
     const Calculate = () => {
-        let a = document.getElementById("a").value;
-        let b = document.getElementById("a").value;
-        switch(mode){
-            case 0:
-                out = a + b;
-                operator = "+";
-                break;
-            case 1:
-                out = a - b;
-                operator = "-";
-                break;
-            case 2:
-                out = a * b;
-                operator = "*";
-                break;
-            case 3:
-                out = a / b;
-                operator = "/";
-                break;
-            default:
-                console.log("error");
+        let a = refA.current.value;
+        let b = refB.current.value;
+        if(state === 0){
+            setOut(a + b);
+        }
+        else if(state === 1){
+            setOut(a - b);
+        }
+        else if(state === 2){
+            setOut(a * b);
+        }
+        else if(state === 3){
+            setOut(a / b);
         }
     }
     return (
         <div className="content">
             <div className="button">
-                <button onClick={mode = 0}>Add</button>
-                <button onClick={mode = 1}>Subtract</button>
-                <button onClick={mode = 2}>Multiply</button>
-                <button onClick={mode = 3}>Divide</button>
+                <button onClick = {()=>{setState(0)}}>Add</button>
+                <button onClick = {()=>{setState(1)}}>Subtract</button>
+                <button onClick = {()=>{setState(2)}}>Multiply</button>
+                <button onClick = {()=>{setState(3)}}>Divide</button>
             </div>
             <div className="input">
-                <input id="a"/>
-                {/* {log} */}
-                <input id="b"/>
+                <input ref={refA}/>
+                {state == 0 ? "+" : state == 1 ? "-" : state == 2 ? "*" : "/"}
+                <input ref={refB}/>
                 =
-                {/* {out} */}
-                <button className="calculate" onClick={Calculate()}>Calculate</button>
+                 {out} 
+                <button className = "calculate" onClick={
+                    Calculate}>Calculate</button>
             </div>
         </div>
     )
